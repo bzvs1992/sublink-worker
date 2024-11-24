@@ -121,7 +121,7 @@ export const PREDEFINED_RULE_SETS = {
 	balanced: ['Location:CN', 'Private', 'Non-China', 'Google', 'Youtube', 'AI Services', 'Telegram'],
 	comprehensive: UNIFIED_RULES.map(rule => rule.name)
   };
-  
+
 
 
 // Generate SITE_RULE_SETS and IP_RULE_SETS from UNIFIED_RULES
@@ -154,13 +154,13 @@ export function generateRules(selectedRules = [], customRules = [], pin) {
 	if (typeof selectedRules === 'string' && PREDEFINED_RULE_SETS[selectedRules]) {
 	  selectedRules = PREDEFINED_RULE_SETS[selectedRules];
 	}
-  
+
 	if (!selectedRules || selectedRules.length === 0) {
 	  selectedRules = PREDEFINED_RULE_SETS.minimal;
 	}
-  
+
 	const rules = [];
-  
+
 	UNIFIED_RULES.forEach(rule => {
 	  if (selectedRules.includes(rule.name)) {
 		rules.push({
@@ -172,7 +172,7 @@ export function generateRules(selectedRules = [], customRules = [], pin) {
 		});
 	  }
 	});
-  
+
 	if (customRules && customRules.length > 0 && pin !== "true") {
 		customRules.forEach((rule) => {
 		  rules.push({
@@ -198,7 +198,7 @@ export function generateRules(selectedRules = [], customRules = [], pin) {
 			});
 		  });
 	}
-  
+
 	return rules;
   }
 
@@ -207,7 +207,7 @@ export function generateRuleSets(selectedRules = [], customRules = []) {
   if (typeof selectedRules === 'string' && PREDEFINED_RULE_SETS[selectedRules]) {
     selectedRules = PREDEFINED_RULE_SETS[selectedRules];
   }
-  
+
   if (!selectedRules || selectedRules.length === 0) {
     selectedRules = PREDEFINED_RULE_SETS.minimal;
   }
@@ -225,7 +225,7 @@ export function generateRuleSets(selectedRules = [], customRules = []) {
       rule.ip_rules.forEach(ipRule => ipRuleSets.add(ipRule));
     }
   });
-  
+
 
 
   const site_rule_sets = Array.from(siteRuleSets).map(rule => ({
@@ -298,7 +298,7 @@ export const SING_BOX_CONFIG = {
 				detour: "🚀 节点选择"
 			},
 			{
-				tag: "dns_direct", 
+				tag: "dns_direct",
 				address: "https://dns.alidns.com/dns-query",
 				address_resolver: "dns_resolver",
 				strategy: "ipv4_only",
@@ -411,30 +411,5 @@ export const CLASH_CONFIG = {
 	'allow-lan': false,
 	mode: 'Rule',
 	'log-level': 'info',
-	dns: {
-		enable: true,
-		ipv6: true,
-		'respect-rules': true,
-		'enhanced-mode': 'fake-ip',
-		nameserver: [
-			'https://120.53.53.53/dns-query',
-			'https://223.5.5.5/dns-query'
-		],
-		'proxy-server-nameserver': [
-			'https://120.53.53.53/dns-query',
-			'https://223.5.5.5/dns-query'
-		],
-		'nameserver-policy': {
-			'geosite:cn,private': [
-				'https://120.53.53.53/dns-query',
-				'https://223.5.5.5/dns-query'
-			],
-			'geosite:geolocation-!cn': [
-				'https://dns.cloudflare.com/dns-query',
-				'https://dns.google/dns-query'
-			]
-		}
-	},
-	proxies: [],
-	'proxy-groups': [],
+	proxies: []
 };
